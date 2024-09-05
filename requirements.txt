@@ -1,0 +1,6 @@
+streamlit
+selenium
+selenium-webdriver
+beautifulsoup4
+pandas
+ollama
