@@ -3,5 +3,5 @@ selenium
 selenium-webdriver
 beautifulsoup4
 pandas
-langchain
+langchain-ollama
 langchain-core
