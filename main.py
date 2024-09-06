@@ -17,7 +17,8 @@ if st.button("Scrape Site"):
         with st.spinner("Processing sitemap..."):
             sites = get_sites(url)
             cleaned_content = []
-            for site in sites:
+            for i,site in enumerate(sites, start=1):
+                print(f"scraping site {i} : {site}")
                 result = scrape_web(site)
                 body_content = extract_body_content(result)
                 cleaned_content.append(clean_body_content(body_content))
