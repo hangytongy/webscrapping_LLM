@@ -1,4 +1,4 @@
-import openai
+from openai import OpenAI
 
 template = '''
     "You are tasked with extracting specific information from the following text content: {dom_content}. "
@@ -9,7 +9,7 @@ template = '''
     "4. **Direct Data Only:** Your output should contain only the data that is explicitly requested, with no other text."
 '''
 
-openai.api_key = "" #OpenAI API KEY
+client = OpenAI(api_key="") #API KEY
 
 def parse_with_openai(dom_chunks, parse_description):
     prompt = template
@@ -17,12 +17,15 @@ def parse_with_openai(dom_chunks, parse_description):
     parsed_results = []
     
     for i, chunk in enumerate(dom_chunks, start=1):
-        response = openai.Completion.create(
+        prompt = prompt.format(dom_content=chunk, parse_description=parse_description)
+        response = client.chat.completions.create(
             model="gpt-4o-mini",
-            prompt = prompt.format(dom_content=chunk, parse_description=parse_description)
+            messages = [
+                {"role":"user", "content" : prompt}
+            ]
         )
         print(f"Parse Batch {i} of {len(dom_chunks)}")
-        parsed_results.append(response.choices[0].text.strip())
+        parsed_results.append(response.choices[0].message.content)
         
     return "\n".join(parsed_results)
 
