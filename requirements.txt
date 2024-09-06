@@ -1,6 +1,5 @@
 streamlit
 selenium
-selenium-webdriver
 beautifulsoup4
 pandas
 langchain-ollama
