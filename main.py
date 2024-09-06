@@ -2,6 +2,7 @@ import streamlit as st
 from bs4 import BeautifulSoup
 from scrape import scrape_web, extract_body_content, clean_body_content, split_dom_content
 from llm_model import parse_with_ollama
+from open_ai_model import parse_with_openai
 
 st.title("AI web Scrapper")
 url = st.text_input("Enter website URL : ")
@@ -32,7 +33,7 @@ if "dom_content" in st.session_state:
             
             #split the content into chunks to parse into the LLM (LLMs have max character limits)
             dom_chunks = split_dom_content(st.session_state.dom_content)
-            result = parse_with_ollama(dom_chunks,parse_description)
+            result = parse_with_openai(dom_chunks,parse_description)
             st.write(result)
     
     

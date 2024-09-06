@@ -4,3 +4,4 @@ beautifulsoup4
 pandas
 langchain-ollama
 langchain-core
+openai
