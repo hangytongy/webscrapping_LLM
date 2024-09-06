@@ -13,7 +13,7 @@ template = (
 #you need to download ollama locally first before you can run
 #download: https://ollama.com/
 #guide: https://github.com/ollama/ollama
-model = OllamaLLM(model="llama3") #choose model, must be downloaded locally
+model = OllamaLLM(model="phi3") #choose model, must be downloaded locally
 
 def parse_with_ollama(dom_chunks, parse_description):
     prompt = ChatPromptTemplate.from_template(template)
