@@ -43,7 +43,7 @@ def clean_body_content(body_content):
     for script_or_style in soup(["script", "style"]): #to remove all the scripting and styles in the html code [unnessasary characters]
         script_or_style.extract()
         
-    cleaned_content = soup.get_text(seperator="\n")
+    cleaned_content = soup.get_text(separator="\n")
     cleaned_content = "\n".join(line.strip() for line in cleaned_content.splitlines() if line.strip()) 
     # get rid of "/n" characters that is not helping to seperate the texts
     
