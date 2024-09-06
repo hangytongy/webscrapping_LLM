@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from scrape import scrape_web, extract_body_content, clean_body_content, split_dom_content
 from llm_model import parse_with_ollama
 from open_ai_model import parse_with_openai
+from get_all_sites import get_sites
 
 st.title("AI web Scrapper")
 url = st.text_input("Enter website URL : ")
@@ -11,9 +12,19 @@ url = st.text_input("Enter website URL : ")
 if st.button("Scrape Site"):
     st.write("Scrapping website")
     
-    result = scrape_web(url)
-    body_content = extract_body_content(result)
-    cleaned_content = clean_body_content(body_content)
+    if st.button("Process as Sitemap"):
+        sites = get_sites(url)
+        cleaned_content = ""
+        for site in sites:
+            result = scrape_web(site)
+            body_content = extract_body_content(result)
+            cleaned_content = cleaned_content.join(body_content)
+
+
+    if st.button("Process as individual"):
+        result = scrape_web(url)
+        body_content = extract_body_content(result)
+        cleaned_content = clean_body_content(body_content)
     
     st.session_state.dom_content = cleaned_content #store into the session for streamlit, so that we can access it later
     

@@ -5,3 +5,5 @@ pandas
 langchain-ollama
 langchain-core
 openai
+requests
+xml
