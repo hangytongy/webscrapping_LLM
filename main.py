@@ -32,7 +32,7 @@ if "dom_content" in st.session_state:
             
             #split the content into chunks to parse into the LLM (LLMs have max character limits)
             dom_chunks = split_dom_content(st.session_state.dom_content)
-            retult = parse_with_ollama(dom_chunks,parse_description)
+            result = parse_with_ollama(dom_chunks,parse_description)
             st.write(result)
     
     
