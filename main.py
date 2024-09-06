@@ -5,32 +5,35 @@ from llm_model import parse_with_ollama
 from open_ai_model import parse_with_openai
 from get_all_sites import get_sites
 
-st.title("AI web Scrapper")
-url = st.text_input("Enter website URL : ")
+st.title("AI Web Scraper")
+url = st.text_input("Enter website URL:")
 
-#if button is clicked
 if st.button("Scrape Site"):
-    st.write("Scrapping website")
+    st.write("Scraping website...")
     
-    if st.button("Process as Sitemap"):
-        sites = get_sites(url)
-        cleaned_content = ""
-        for site in sites:
-            result = scrape_web(site)
+    scrape_option = st.radio("Choose scraping method:", ["Process as Sitemap", "Process as Individual"])
+    
+    if scrape_option == "Process as Sitemap":
+        with st.spinner("Processing sitemap..."):
+            sites = get_sites(url)
+            cleaned_content = []
+            for site in sites:
+                result = scrape_web(site)
+                body_content = extract_body_content(result)
+                cleaned_content.append(clean_body_content(body_content))
+            cleaned_content = "\n".join(cleaned_content)
+    else:  # Process as Individual
+        with st.spinner("Processing individual site..."):
+            result = scrape_web(url)
             body_content = extract_body_content(result)
-            cleaned_content = cleaned_content.join(body_content)
-
-
-    if st.button("Process as individual"):
-        result = scrape_web(url)
-        body_content = extract_body_content(result)
-        cleaned_content = clean_body_content(body_content)
+            cleaned_content = clean_body_content(body_content)
     
-    st.session_state.dom_content = cleaned_content #store into the session for streamlit, so that we can access it later
+    st.session_state.dom_content = cleaned_content
     
-    # a button that when u click on it, it will expand and show the contents parsed in
     with st.expander("View DOM Content"):
         st.text_area("DOM Content", cleaned_content, height=300)
+    
+    st.success("Scraping completed!")
         
 #if we saved the content
 if "dom_content" in st.session_state:
