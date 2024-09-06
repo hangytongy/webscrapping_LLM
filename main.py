@@ -7,11 +7,11 @@ from get_all_sites import get_sites
 
 st.title("AI Web Scraper")
 url = st.text_input("Enter website URL:")
+    
+scrape_option = st.radio("Choose scraping method:", ["Process as Sitemap", "Process as Individual"])
 
 if st.button("Scrape Site"):
     st.write("Scraping website...")
-    
-    scrape_option = st.radio("Choose scraping method:", ["Process as Sitemap", "Process as Individual"])
     
     if scrape_option == "Process as Sitemap":
         with st.spinner("Processing sitemap..."):
