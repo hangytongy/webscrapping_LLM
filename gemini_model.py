@@ -39,6 +39,8 @@ def parse_with_gemini(dom_chunks, parse_description):
 
         response = model.generate_content(prompt)
 
+        print(response)
+        print(f"Parse Batch {i} of {len(dom_chunks)}")
         parsed_results.append(response)
 
         
