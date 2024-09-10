@@ -11,3 +11,14 @@ This code helps you to scrape a website and parse in your prompt to get the desi
 > Ollama Download Link: https://ollama.com/
 
 > Ollama Github: https://github.com/ollama/ollama
+
+
+### Heurist API
+
+> should you want to use Heurist API (), change the following lines of code in `open_ai_model.py`
+
+```
+client = OpenAI(base_url="https://llm-gateway.heurist.xyz", api_key="your_user_id#your_api_key")
+
+model_id = "mistralai/mixtral-8x7b-instruct-v0.1"
+```
