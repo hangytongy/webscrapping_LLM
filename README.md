@@ -15,10 +15,10 @@ This code helps you to scrape a website and parse in your prompt to get the desi
 
 ### Heurist API
 
-> should you want to use Heurist API (), change the following lines of code in `open_ai_model.py`
+> should you want to use Heurist API (https://docs.heurist.ai/integration/developer-api-overview), change the following lines of code in `open_ai_model.py`
 
 ```
 client = OpenAI(base_url="https://llm-gateway.heurist.xyz", api_key="your_user_id#your_api_key")
 
-model_id = "mistralai/mixtral-8x7b-instruct-v0.1"
+model= "mistralai/mixtral-8x7b-instruct-v0.1"
 ```
