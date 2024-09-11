@@ -50,4 +50,35 @@ streamlit run main.py
 
 1. There are 2 kinds of scrapping, via local[`scrape.py`] or via remote['scrape_remote.py']. if you are choosing remote, you need to add in your own proxy. in this case, the example uses an online tool to get the proxy.
 2. for the LLM, there are currently 3 models, ollama[`llm_model.py`], openai[`open_ai_model.py`] and gemini['gemini_model.py']. if you want to run locally, you can use ollama, however you can also use others as you deem fit as long as it fits your budget and expected prompy amount.
-3. inside the LLM scripts, there is a default template used to prompt the LLM. you can change it as u like. Attached in this folder is also aother kind of prompt that you may want to use. 
+3. inside the LLM scripts, there is a default template used to prompt the LLM. you can change it as u like. Attached in this folder is also aother kind of prompt that you may want to use.
+
+### Future builds
+
+Have another option to scrape the website with all related links to the parent domain.Eg.
+
+```
+import requests
+from bs4 import BeautifulSoup
+
+# Set the URL
+url = "https://gocity.com/"
+
+# Send an HTTP request to the website
+response = requests.get(url)
+
+# Parse the HTML content using BeautifulSoup
+soup = BeautifulSoup(response.content, "html.parser")
+
+# Find all anchor tags (links)
+links = soup.find_all('a')
+
+# Extract the href attribute from each anchor tag
+all_links = [link.get('href') for link in links if link.get('href') is not None]
+
+# Filter to ensure unique links
+unique_links = list(set(all_links))
+
+# Print the extracted links
+for link in unique_links:
+    print(link)
+```
